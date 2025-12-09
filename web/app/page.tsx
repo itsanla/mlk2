@@ -14,7 +14,7 @@ export default function Home() {
     {
       role: 'Project Manager',
       name: 'Agel Deska Wisamulya (2311082002)',
-      description: 'Bertanggung jawab dalam perencanaan, koordinasi tim, dan memastikan proyek berjalan sesuai timeline. Mengelola komunikasi antar anggota dan dokumentasi proyek.',
+      description: 'Bertanggung jawab dalam perencanaan, koordinasi tim, Mengelola Pembuatan Jurnal dan memastikan proyek berjalan sesuai timeline.',
       icon: '📋'
     },
     {
@@ -131,7 +131,7 @@ export default function Home() {
                         <div className="flex-shrink-0">
                           <div className="relative w-32 h-32 md:w-40 md:h-40">
                             <Image
-                              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvPh9hd-Nonod-jOedev2EWsldcuYjabXayQ&s"
+                              src={member.role === 'Project Manager' ? '/agel.png' : member.role === 'Data Analyst' ? '/gia.png' : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvPh9hd-Nonod-jOedev2EWsldcuYjabXayQ&s'}
                               alt={member.role}
                               fill
                               className="rounded-full object-cover border-4 border-orange-200"
