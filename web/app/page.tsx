@@ -44,7 +44,7 @@ export default function Home() {
     
     setLoading(true);
     try {
-      const apiUrl = (window as any).__ENV__?.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
       const response = await fetch(`${apiUrl}/api/predict/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
