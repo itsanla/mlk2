@@ -44,7 +44,8 @@ export default function Home() {
     
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/predict/`, {
+      const apiUrl = (window as any).__ENV__?.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/api/predict/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ judul })
@@ -176,14 +177,14 @@ export default function Home() {
             {/* Navigation Arrows */}
             <button
               onClick={() => { setCurrentSlide((prev) => (prev - 1 + teamMembers.length) % teamMembers.length); setSlideKey(prev => prev + 1); }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/90 text-orange-600/50 hover:text-orange-600 w-10 h-10 rounded-full backdrop-blur-sm hover:shadow-lg flex items-center justify-center transition-all z-10"
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/90 text-orange-600/50 hover:text-orange-600 w-10 h-10 rounded-full backdrop-blur-sm hover:shadow-lg flex items-center justify-center transition-all"
               aria-label="Previous slide"
             >
               ←
             </button>
             <button
               onClick={() => { setCurrentSlide((prev) => (prev + 1) % teamMembers.length); setSlideKey(prev => prev + 1); }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/90 text-orange-600/50 hover:text-orange-600 w-10 h-10 rounded-full backdrop-blur-sm hover:shadow-lg flex items-center justify-center transition-all z-10"
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/90 text-orange-600/50 hover:text-orange-600 w-10 h-10 rounded-full backdrop-blur-sm hover:shadow-lg flex items-center justify-center transition-all"
               aria-label="Next slide"
             >
               →

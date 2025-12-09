@@ -1,69 +1,144 @@
-# mlk2
+# 🎓 MLK2 - Prediksi KBK Tugas Akhir
 
-## Development Mode (Tanpa Docker)
+> Sistem prediksi Kelompok Bidang Keahlian (KBK) menggunakan algoritma Naive Bayes
 
-### Backend (Django API)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://hub.docker.com/u/itsanla)
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Django](https://img.shields.io/badge/Django-6.0-092E20?logo=django&logoColor=white)](https://www.djangoproject.com/)
 
-```bash
-# Masuk ke folder api
-cd api
+## 📋 Deskripsi
 
-# Aktifkan virtual environment
-source venv/bin/activate  # Linux/Mac
-# atau
-venv\Scripts\activate  # Windows
+Aplikasi web untuk memprediksi kategori KBK (Software, Jaringan, AI/ML, Animasi) berdasarkan judul tugas akhir mahasiswa menggunakan algoritma Naive Bayes.
 
-# Jalankan server
-python manage.py runserver
-```
-
-Backend akan berjalan di: `http://localhost:8000`
-
-### Frontend (Next.js)
-
-```bash
-# Masuk ke folder web (terminal baru)
-cd web
-
-# Jalankan development server
-pnpm dev
-```
-
-Frontend akan berjalan di: `http://localhost:3000`
+**Kelompok 2 - Machine Learning**
+- 📋 Agel Deska Wisamulya (2311082002) - Project Manager
+- 📊 Delonic Ligia (2311081009) - Data Analyst
+- 💻 Anla Harpanda (2311083015) - Programmer
 
 ---
 
-## Production Mode (Dengan Docker)
+## 🚀 Quick Start dengan Docker
+
+### Pull dari Docker Hub
+
+```bash
+# Pull images
+docker pull itsanla/mlk2-api:latest
+docker pull itsanla/mlk2-web:latest
+```
+
+### Jalankan Container
+
+```bash
+# Run backend
+docker run -d \
+  --name api \
+  -p 8000:8000 \
+  -e SECRET_KEY=your-secret-key \
+  -e ALLOWED_HOSTS=* \
+  itsanla/mlk2-api:latest
+
+# Run frontend
+docker run -d \
+  --name web \
+  -p 3000:3000 \
+  -e API_URL=http://localhost:8000 \
+  itsanla/mlk2-web:latest
+```
+
+### Akses Aplikasi
+
+- 🌐 **Frontend**: http://localhost:3000
+- 🔌 **Backend API**: http://localhost:8000
+
+### Stop Container
+
+```bash
+docker stop api web
+docker rm api web
+```
+
+---
+
+## 🐳 Docker Compose (Recommended)
 
 ```bash
 # Build dan jalankan semua service
-docker-compose up --build
-
-# Atau jalankan di background
 docker-compose up -d
+
+# Lihat logs
+docker-compose logs -f
 
 # Stop semua service
 docker-compose down
 ```
 
-- Backend API: `http://localhost:8000`
-- Frontend Web: `http://localhost:3000`
+---
+
+## 💻 Development Mode (Tanpa Docker)
+
+### Backend (Django API)
+
+```bash
+cd api
+
+# Buat virtual environment
+python3 -m venv venv
+
+# Aktifkan virtual environment
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Jalankan server
+python3 manage.py runserver
+```
+
+✅ Backend: `http://localhost:8000`
+
+### Frontend (Next.js)
+
+```bash
+cd web
+
+# Install dependencies
+pnpm install
+
+# Jalankan development server
+pnpm dev
+```
+
+✅ Frontend: `http://localhost:3000`
 
 ---
 
-## API Endpoints
+## 📡 API Documentation
 
-### POST /api/predict/
-Prediksi KBK berdasarkan judul TA
+### Endpoint: Prediksi KBK
 
-**Request:**
+**POST** `/api/predict/`
+
+Prediksi kategori KBK berdasarkan judul tugas akhir.
+
+#### Request
+
+```bash
+curl -X POST http://localhost:8000/api/predict/ \
+  -H "Content-Type: application/json" \
+  -d '{"judul": "implementasi cloud computing untuk sistem informasi"}'
+```
+
 ```json
 {
   "judul": "implementasi cloud computing untuk sistem informasi"
 }
 ```
 
-**Response:**
+#### Response
+
 ```json
 {
   "judul": "implementasi cloud computing untuk sistem informasi",
@@ -76,3 +151,74 @@ Prediksi KBK berdasarkan judul TA
   }
 }
 ```
+
+---
+
+## 🏗️ Tech Stack
+
+### Backend
+- **Framework**: Django 6.0 + Django REST Framework
+- **ML Algorithm**: Naive Bayes (scikit-learn)
+- **Server**: Gunicorn
+- **Language**: Python 3.12
+
+### Frontend
+- **Framework**: Next.js 16
+- **Styling**: Tailwind CSS
+- **Language**: TypeScript
+- **Package Manager**: pnpm
+
+### DevOps
+- **Containerization**: Docker
+- **Registry**: Docker Hub
+- **Deployment**: Railway, Vercel
+
+---
+
+## 🔧 Environment Variables
+
+### Backend (.env)
+
+```env
+SECRET_KEY=your-django-secret-key
+DEBUG=False
+ALLOWED_HOSTS=localhost,127.0.0.1,your-domain.com
+CORS_ALLOWED_ORIGINS=http://localhost:3000,https://your-frontend.com
+```
+
+### Frontend (.env.local)
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+---
+
+## 📦 Docker Images
+
+- **Backend**: [`itsanla/mlk2-api`](https://hub.docker.com/r/itsanla/mlk2-api)
+- **Frontend**: [`itsanla/mlk2-web`](https://hub.docker.com/r/itsanla/mlk2-web)
+
+### Build Custom Image
+
+```bash
+# Backend
+docker build -t itsanla/mlk2-api:latest ./api
+
+# Frontend
+docker build -t itsanla/mlk2-web:latest ./web
+```
+
+---
+
+## 📝 License
+
+MIT License - Politeknik Negeri Padang © 2025
+
+---
+
+## 👥 Contributors
+
+Kelompok 2 - Mata Kuliah Machine Learning
+
+**Politeknik Negeri Padang**

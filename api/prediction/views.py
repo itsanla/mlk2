@@ -1,10 +1,12 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.views.decorators.csrf import csrf_exempt
 from .ml_model import NaiveBayesModel
 
 model = NaiveBayesModel()
 
+@csrf_exempt
 @api_view(['POST'])
 def predict_kbk(request):
     judul = request.data.get('judul', '')
