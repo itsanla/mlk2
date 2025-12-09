@@ -172,10 +172,82 @@ curl -X POST http://localhost:8000/api/predict/ \
 - **Containerization**: Docker
 - **Registry**: Docker Hub
 - **Deployment**: Railway, Vercel
+- **DNS**: deSEC (dedyn.io)
+
+---
+
+## 🌐 Live Demo
+
+- **Frontend**: https://www.kelompok2.dedyn.io
+- **Backend API**: https://mlk2-api-production.up.railway.app
+
+---
+
+## 🚀 Deployment
+
+### Backend (Railway)
+
+1. Deploy Docker image:
+   ```
+   itsanla/mlk2-api:latest
+   ```
+
+2. Environment Variables:
+   ```env
+   SECRET_KEY=your-secret-key
+   DEBUG=False
+   ALLOWED_HOSTS=*
+   ```
+
+3. Railway akan generate URL: `mlk2-api-production.up.railway.app`
+
+### Frontend (Vercel)
+
+1. Connect GitHub repository
+2. Framework Preset: **Next.js**
+3. Environment Variables:
+   ```env
+   NEXT_PUBLIC_API_URL=https://mlk2-api-production.up.railway.app
+   ```
+4. Deploy
+
+### Custom Domain (deSEC)
+
+1. Login ke [deSEC](https://desec.io/domains/kelompok2.dedyn.io)
+2. Tambahkan DNS Records:
+
+   **Frontend (Vercel):**
+   ```
+   Type: CNAME
+   Name: www
+   Target: cname.vercel-dns.com
+   ```
+
+   **Root Domain:**
+   ```
+   Type: A
+   Name: @
+   Target: 76.76.21.21 (Vercel IP)
+   ```
+
+3. Di Vercel, tambahkan custom domain:
+   - Settings → Domains
+   - Add: `www.kelompok2.dedyn.io`
+   - Add: `kelompok2.dedyn.io`
 
 ---
 
 ## 🔧 Environment Variables
+
+### Production URLs
+
+```env
+# Backend API
+https://mlk2-api-production.up.railway.app
+
+# Frontend
+https://www.kelompok2.dedyn.io
+```
 
 ### Backend (.env)
 
