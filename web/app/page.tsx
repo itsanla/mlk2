@@ -13,19 +13,19 @@ export default function Home() {
   const teamMembers = [
     {
       role: 'Project Manager',
-      name: 'Anggota 1',
+      name: 'Agel Deska Wisamulya (2311082002)',
       description: 'Bertanggung jawab dalam perencanaan, koordinasi tim, dan memastikan proyek berjalan sesuai timeline. Mengelola komunikasi antar anggota dan dokumentasi proyek.',
       icon: '📋'
     },
     {
       role: 'Data Analyst',
-      name: 'Anggota 2',
+      name: 'Delonic Ligia (2311081009)',
       description: 'Menganalisis dataset tugas akhir, melakukan preprocessing data, dan evaluasi performa model. Bertanggung jawab atas kualitas dan akurasi data training.',
       icon: '📊'
     },
     {
       role: 'Programmer',
-      name: 'Anggota 3',
+      name: 'Anla Harpanda (2311083015)',
       description: 'Mengimplementasikan algoritma Naive Bayes, membangun API backend dengan Django, dan mengembangkan frontend dengan Next.js. Menangani deployment dan integrasi sistem.',
       icon: '💻'
     }
