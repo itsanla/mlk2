@@ -59,7 +59,11 @@ export default function Home() {
   useEffect(() => {
     if (result && resultRef.current) {
       setTimeout(() => {
-        resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const element = resultRef.current;
+        if (element) {
+          const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
       }, 100);
     }
   }, [result]);
