@@ -8,6 +8,7 @@ export default function Home() {
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [slideKey, setSlideKey] = useState(0);
   const resultRef = useRef<HTMLDivElement>(null);
 
   const teamMembers = [
@@ -34,9 +35,9 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % teamMembers.length);
-    }, 6000);
+    }, 5000);
     return () => clearInterval(interval);
-  }, [teamMembers.length]);
+  }, [teamMembers.length, slideKey]);
 
   const handlePredict = async () => {
     if (!judul.trim()) return;
@@ -174,14 +175,14 @@ export default function Home() {
 
             {/* Navigation Arrows */}
             <button
-              onClick={() => setCurrentSlide((prev) => (prev - 1 + teamMembers.length) % teamMembers.length)}
+              onClick={() => { setCurrentSlide((prev) => (prev - 1 + teamMembers.length) % teamMembers.length); setSlideKey(prev => prev + 1); }}
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/90 text-orange-600/50 hover:text-orange-600 w-10 h-10 rounded-full backdrop-blur-sm hover:shadow-lg flex items-center justify-center transition-all z-10"
               aria-label="Previous slide"
             >
               ←
             </button>
             <button
-              onClick={() => setCurrentSlide((prev) => (prev + 1) % teamMembers.length)}
+              onClick={() => { setCurrentSlide((prev) => (prev + 1) % teamMembers.length); setSlideKey(prev => prev + 1); }}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/90 text-orange-600/50 hover:text-orange-600 w-10 h-10 rounded-full backdrop-blur-sm hover:shadow-lg flex items-center justify-center transition-all z-10"
               aria-label="Next slide"
             >
