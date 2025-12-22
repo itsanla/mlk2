@@ -43,14 +43,14 @@ docker run -d \
 docker run -d \
   --name web \
   -p 3000:3000 \
-  -e API_URL=http://localhost:8000 \
+  -e NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com \
   itsanla/mlk2-web:latest
 ```
 
 ### Akses Aplikasi
 
 - 🌐 **Frontend**: http://localhost:3000
-- 🔌 **Backend API**: http://localhost:8000
+- 🔌 **Backend API**: http://localhost:8000 (development) / https://sitabi-api.mooo.com (production)
 
 ### Stop Container
 
@@ -126,7 +126,7 @@ Prediksi kategori KBK berdasarkan judul tugas akhir.
 #### Request
 
 ```bash
-curl -X POST http://localhost:8000/api/predict/ \
+curl -X POST ${API_URL:-http://localhost:8000}/api/predict/ \
   -H "Content-Type: application/json" \
   -d '{"judul": "implementasi cloud computing untuk sistem informasi"}'
 ```
@@ -178,8 +178,8 @@ curl -X POST http://localhost:8000/api/predict/ \
 
 ## 🌐 Live Demo
 
-- **Frontend**: https://www.kelompok2.dedyn.io
-- **Backend API**: https://mlk2-api-production.up.railway.app
+- **Frontend**: https://sitabi.mooo.com
+- **Backend API**: https://sitabi-api.mooo.com
 
 ---
 
@@ -207,7 +207,7 @@ curl -X POST http://localhost:8000/api/predict/ \
 2. Framework Preset: **Next.js**
 3. Environment Variables:
    ```env
-   NEXT_PUBLIC_API_URL=https://mlk2-api-production.up.railway.app
+   NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com
    ```
 4. Deploy
 
@@ -243,10 +243,10 @@ curl -X POST http://localhost:8000/api/predict/ \
 
 ```env
 # Backend API
-https://mlk2-api-production.up.railway.app
+https://sitabi-api.mooo.com
 
 # Frontend
-https://www.kelompok2.dedyn.io
+https://sitabi.mooo.com
 ```
 
 ### Backend (.env)
@@ -261,7 +261,7 @@ CORS_ALLOWED_ORIGINS=http://localhost:3000,https://your-frontend.com
 ### Frontend (.env.local)
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com
 ```
 
 ---
