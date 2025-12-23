@@ -119,7 +119,7 @@ export default function OverviewPage() {
                   label={{ value: 'Performance (%)', angle: -90, position: 'insideLeft' }} 
                   domain={[0, 100]}
                 />
-                <Tooltip formatter={(value: number) => `${value.toFixed(2)}%`} />
+                <Tooltip formatter={(value: number | undefined) => value ? `${value.toFixed(2)}%` : 'N/A'} />
                 <Legend />
                 <Line 
                   type="monotone" 
