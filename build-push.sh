@@ -1,39 +1,35 @@
 #!/bin/bash
 
 # Build and Push Script for MLK2 Docker Images
-# Usage: ./build-push.sh [version]
-# Example: ./build-push.sh v1.0.0
 
 VERSION=${1:-latest}
 
-echo "🔨 Building images with tag: $VERSION"
+echo "🔨 Building images..."
 
 # Build backend
-echo "📦 Building backend..."
-docker build -t itsanla/mlk2-api:$VERSION -t itsanla/mlk2-api:latest ./api
+docker build -t itsanla/mlk2-api:$VERSION ./api
 
-# Build frontend
-echo "📦 Building frontend..."
-docker build -t itsanla/mlk2-web:$VERSION -t itsanla/mlk2-web:latest ./web
+# Build frontend with production API URL
+docker build \
+  --build-arg NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com \
+  -t itsanla/mlk2-web:$VERSION \
+  ./web
+
+if [ "$VERSION" != "latest" ]; then
+    docker tag itsanla/mlk2-api:$VERSION itsanla/mlk2-api:latest
+    docker tag itsanla/mlk2-web:$VERSION itsanla/mlk2-web:latest
+fi
 
 echo "✅ Build completed!"
 echo ""
 echo "🚀 Pushing to Docker Hub..."
 
-# Push backend
-echo "⬆️  Pushing backend..."
 docker push itsanla/mlk2-api:$VERSION
-docker push itsanla/mlk2-api:latest
-
-# Push frontend
-echo "⬆️  Pushing frontend..."
 docker push itsanla/mlk2-web:$VERSION
-docker push itsanla/mlk2-web:latest
 
-echo "✅ All images pushed successfully!"
-echo ""
-echo "📋 Images:"
-echo "   - itsanla/mlk2-api:$VERSION"
-echo "   - itsanla/mlk2-api:latest"
-echo "   - itsanla/mlk2-web:$VERSION"
-echo "   - itsanla/mlk2-web:latest"
+if [ "$VERSION" != "latest" ]; then
+    docker push itsanla/mlk2-api:latest
+    docker push itsanla/mlk2-web:latest
+fi
+
+echo "✅ Done!"

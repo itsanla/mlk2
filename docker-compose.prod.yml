@@ -1,7 +1,0 @@
-version: '3.8'
-
-services:
-  web:
-    environment:
-      - NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com
-      - NODE_ENV=production
