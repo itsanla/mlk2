@@ -8,8 +8,8 @@ services:
     environment:
       - DEBUG=False
       - SECRET_KEY=${SECRET_KEY:-django-insecure-change-this-in-production}
-      - ALLOWED_HOSTS=sitabi-api.mooo.com,localhost,127.0.0.1
-      - CORS_ALLOWED_ORIGINS=https://sitabi.mooo.com,http://localhost:3000
+      - ALLOWED_HOSTS=kelompok2-api.mooo.com,localhost,127.0.0.1
+      - CORS_ALLOWED_ORIGINS=https://kelompok2.mooo.com,http://localhost:3000
     restart: unless-stopped
     networks:
       - app-network
@@ -19,7 +19,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com
+      - NEXT_PUBLIC_API_URL=https://kelompok2-api.mooo.com
       - NODE_ENV=production
     restart: unless-stopped
     depends_on:
