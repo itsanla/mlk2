@@ -33,7 +33,7 @@ docker build -t itsanla/mlk2-api:$NEW_VERSION -t itsanla/mlk2-api:latest ./api
 
 # Build frontend
 docker build \
-  --build-arg NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com \
+  --build-arg NEXT_PUBLIC_API_URL=https://kelompok2-api.mooo.com \
   -t itsanla/mlk2-web:$NEW_VERSION \
   -t itsanla/mlk2-web:latest \
   ./web

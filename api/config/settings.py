@@ -139,7 +139,7 @@ else:
     if cors_origins:
         CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_origins.split(",")]
     else:
-        CORS_ALLOWED_ORIGINS = ["https://sitabi.mooo.com"]
+        CORS_ALLOWED_ORIGINS = ["https://kelompok2.mooo.com"]
 
 CORS_ALLOW_METHODS = [
     "DELETE",

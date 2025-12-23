@@ -11,7 +11,7 @@ docker build -t itsanla/mlk2-api:$VERSION ./api
 
 # Build frontend with production API URL
 docker build \
-  --build-arg NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com \
+  --build-arg NEXT_PUBLIC_API_URL=https://kelompok2-api.mooo.com \
   -t itsanla/mlk2-web:$VERSION \
   ./web
 

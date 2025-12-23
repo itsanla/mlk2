@@ -43,14 +43,14 @@ docker run -d \
 docker run -d \
   --name web \
   -p 3000:3000 \
-  -e NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com \
+  -e NEXT_PUBLIC_API_URL=https://kelompok2-api.mooo.com \
   itsanla/mlk2-web:latest
 ```
 
 ### Akses Aplikasi
 
 - 🌐 **Frontend**: http://localhost:3000
-- 🔌 **Backend API**: http://localhost:8000 (development) / https://sitabi-api.mooo.com (production)
+- 🔌 **Backend API**: http://localhost:8000 (development) / https://kelompok2-api.mooo.com (production)
 
 ### Stop Container
 
@@ -178,8 +178,8 @@ curl -X POST ${API_URL:-http://localhost:8000}/api/predict/ \
 
 ## 🌐 Live Demo
 
-- **Frontend**: https://sitabi.mooo.com
-- **Backend API**: https://sitabi-api.mooo.com
+- **Frontend**: https://kelompok2.mooo.com
+- **Backend API**: https://kelompok2-api.mooo.com
 
 ---
 
@@ -207,7 +207,7 @@ curl -X POST ${API_URL:-http://localhost:8000}/api/predict/ \
 2. Framework Preset: **Next.js**
 3. Environment Variables:
    ```env
-   NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com
+   NEXT_PUBLIC_API_URL=https://kelompok2-api.mooo.com
    ```
 4. Deploy
 
@@ -243,10 +243,10 @@ curl -X POST ${API_URL:-http://localhost:8000}/api/predict/ \
 
 ```env
 # Backend API
-https://sitabi-api.mooo.com
+https://kelompok2-api.mooo.com
 
 # Frontend
-https://sitabi.mooo.com
+https://kelompok2.mooo.com
 ```
 
 ### Backend (.env)
@@ -261,7 +261,7 @@ CORS_ALLOWED_ORIGINS=http://localhost:3000,https://your-frontend.com
 ### Frontend (.env.local)
 
 ```env
-NEXT_PUBLIC_API_URL=https://sitabi-api.mooo.com
+NEXT_PUBLIC_API_URL=https://kelompok2-api.mooo.com
 ```
 
 ---
