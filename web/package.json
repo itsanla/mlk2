@@ -9,9 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@visactor/react-vchart": "^1.12.10",
+    "@visactor/vchart": "^1.12.10",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.436.0",
     "next": "16.0.7",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "recharts": "^3.6.0",
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

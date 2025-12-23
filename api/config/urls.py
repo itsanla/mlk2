@@ -14,15 +14,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
 
+
 def root_view(request):
     return JsonResponse({"message": "MLK2 API is running", "status": "ok"})
 
+
 urlpatterns = [
-    path('', root_view, name='root'),
-    path('admin/', admin.site.urls),
-    path('api/', include('prediction.urls')),
+    path("", root_view, name="root"),
+    path("admin/", admin.site.urls),
+    path("api/", include("prediction.urls")),
 ]

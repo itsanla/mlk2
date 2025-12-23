@@ -7,8 +7,8 @@ export default function Home() {
   const [judul, setJudul] = useState('');
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [slideKey, setSlideKey] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(true);
   const resultRef = useRef<HTMLDivElement>(null);
 
   const teamMembers = [
@@ -32,12 +32,34 @@ export default function Home() {
     }
   ];
 
+  const extendedMembers = [teamMembers[teamMembers.length - 1], ...teamMembers, teamMembers[0]];
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % teamMembers.length);
+      goToNext();
     }, 5000);
     return () => clearInterval(interval);
-  }, [teamMembers.length, slideKey]);
+  }, [currentSlide]);
+
+  const goToNext = () => {
+    setIsTransitioning(true);
+    setCurrentSlide(prev => prev + 1);
+  };
+
+  const goToPrev = () => {
+    setIsTransitioning(true);
+    setCurrentSlide(prev => prev - 1);
+  };
+
+  const handleTransitionEnd = () => {
+    if (currentSlide === 0) {
+      setIsTransitioning(false);
+      setCurrentSlide(teamMembers.length);
+    } else if (currentSlide === teamMembers.length + 1) {
+      setIsTransitioning(false);
+      setCurrentSlide(1);
+    }
+  };
 
   const handlePredict = async () => {
     if (!judul.trim()) return;
@@ -89,25 +111,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
-      {/* Header */}
-      <header className="bg-white/90 backdrop-blur-sm border-b border-orange-100 sticky top-0 z-10 shadow-sm">
-        <div className="max-w-5xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Image src="https://www.pnp.ac.id/wp-content/uploads/2025/01/LOGO-PNP.png" alt="Logo PNP" width={50} height={50} className="object-contain" />
-              <div>
-                <h1 className="text-xl font-bold text-gray-900">Prediksi KBK</h1>
-                <p className="text-sm text-gray-600">Tugas Akhir - Machine Learning</p>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-sm font-semibold text-orange-600">Kelompok 2</p>
-              <p className="text-xs text-gray-500">Politeknik Negeri Padang 2025</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
       <main className="max-w-5xl mx-auto px-4 py-12">
         {/* Hero Section with Team Slider */}
@@ -129,10 +132,15 @@ export default function Home() {
           {/* Team Slider */}
           <div className="relative bg-white rounded-2xl shadow-xl border border-orange-100">
             <div className="px-16 overflow-hidden">
-              <div className="flex transition-transform duration-500 ease-in-out">
-                <div className="w-full" style={{ transform: `translateX(-${currentSlide * 100}%)`, transition: 'transform 0.5s ease-in-out' }}>
-                  <div className="flex">
-                    {teamMembers.map((member, index) => (
+              <div 
+                className="flex"
+                style={{ 
+                  transform: `translateX(-${currentSlide * 100}%)`,
+                  transition: isTransitioning ? 'transform 0.5s ease-in-out' : 'none'
+                }}
+                onTransitionEnd={handleTransitionEnd}
+              >
+                {extendedMembers.map((member, index) => (
                       <div key={index} className="min-w-full flex flex-col md:flex-row items-center gap-8 py-8 px-16">
                         <div className="flex-shrink-0">
                           <div className="relative w-32 h-32 md:w-40 md:h-40">
@@ -153,11 +161,8 @@ export default function Home() {
                           <p className="text-gray-600 leading-relaxed">{member.description}</p>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
-
             </div>
 
             {/* Navigation Dots */}
@@ -165,9 +170,12 @@ export default function Home() {
               {teamMembers.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentSlide(index)}
+                  onClick={() => {
+                    setIsTransitioning(true);
+                    setCurrentSlide(index + 1);
+                  }}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    currentSlide === index ? 'bg-orange-500 w-8' : 'bg-orange-200'
+                    currentSlide === index + 1 || (currentSlide === 0 && index === teamMembers.length - 1) || (currentSlide === teamMembers.length + 1 && index === 0) ? 'bg-orange-500 w-8' : 'bg-orange-200'
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -176,14 +184,14 @@ export default function Home() {
 
             {/* Navigation Arrows */}
             <button
-              onClick={() => { setCurrentSlide((prev) => (prev - 1 + teamMembers.length) % teamMembers.length); setSlideKey(prev => prev + 1); }}
+              onClick={goToPrev}
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/90 text-orange-600/50 hover:text-orange-600 w-10 h-10 rounded-full backdrop-blur-sm hover:shadow-lg flex items-center justify-center transition-all"
               aria-label="Previous slide"
             >
               ←
             </button>
             <button
-              onClick={() => { setCurrentSlide((prev) => (prev + 1) % teamMembers.length); setSlideKey(prev => prev + 1); }}
+              onClick={goToNext}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/90 text-orange-600/50 hover:text-orange-600 w-10 h-10 rounded-full backdrop-blur-sm hover:shadow-lg flex items-center justify-center transition-all"
               aria-label="Next slide"
             >

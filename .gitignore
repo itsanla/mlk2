@@ -29,6 +29,8 @@ yarn-error.log*
 *.swp
 *.swo
 
+visactor-next-template-main/
+
 # OS
 .DS_Store
 Thumbs.db
