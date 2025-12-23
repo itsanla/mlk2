@@ -186,7 +186,7 @@ class NaiveBayesModel:
         
         self.selector = None
 
-        self.model = MultinomialNB(alpha=1.0, fit_prior=True)
+        self.model = MultinomialNB(alpha=1.7, fit_prior=True)
         self.model.fit(X_vectorized, y)
 
         try:
@@ -429,7 +429,7 @@ class NaiveBayesModel:
                 max_df=0.5, sublinear_tf=True, stop_words=domain_stopwords
             )
             X_temp = temp_vec.fit_transform(X)
-            temp_model = MultinomialNB(alpha=1.0 if features < 50 else 1.0)
+            temp_model = MultinomialNB(alpha=1.7 if features < 50 else 1.7)
             temp_model.fit(X_temp, y)
             
             train_acc = temp_model.score(X_temp, y) * 100

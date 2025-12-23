@@ -3,13 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useAuth } from '@/context/AuthContext';
 import Image from 'next/image';
 import { Home, LogOut, Menu, LucideIcon, MessageCircle } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 const ChatbotModal = dynamic(
-  () => import('@/app/components/SitaBot/ChatbotModal'),
+  () => import('@/app/components/SitaBot/ChatbotModal').catch(() => ({ default: () => null })),
   {
     ssr: false,
   },
@@ -122,10 +121,12 @@ export default function UserSidebar({
   menuTitle,
   dashboardHref,
 }: UserSidebarProps) {
-  const { user, logout } = useAuth();
   const router = useRouter();
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  const user = { nama: 'Guest', roles: [{ name: 'user' }] };
+  const logout = () => router.push('/');
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
