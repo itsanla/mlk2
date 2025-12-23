@@ -5,14 +5,6 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Home, LogOut, Menu, LucideIcon, MessageCircle } from 'lucide-react';
-import dynamic from 'next/dynamic';
-
-const ChatbotModal = dynamic(
-  () => import('@/app/components/SitaBot/ChatbotModal').catch(() => ({ default: () => null })),
-  {
-    ssr: false,
-  },
-);
 
 interface NavItem {
   href: string;
@@ -64,7 +56,7 @@ const NavLink = ({
   };
 
   const Component = item.isSitaBot ? 'button' : Link;
-  const componentProps = item.isSitaBot
+  const componentProps: any = item.isSitaBot
     ? { onClick, type: 'button' as const }
     : { href: item.href, prefetch: true };
 
@@ -122,7 +114,6 @@ export default function UserSidebar({
   dashboardHref,
 }: UserSidebarProps) {
   const router = useRouter();
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const user = { nama: 'Guest', roles: [{ name: 'user' }] };
@@ -136,11 +127,7 @@ export default function UserSidebar({
   }, []);
 
   const handleSitaBotClick = () => {
-    if (isMobile) {
-      router.push('/chatbot');
-    } else {
-      setIsChatOpen(true);
-    }
+    router.push('/chatbot');
   };
 
   return (
@@ -373,13 +360,6 @@ export default function UserSidebar({
           </button>
         </div>
       </aside>
-
-      {!isMobile && !!isChatOpen && (
-        <ChatbotModal
-          isOpen={isChatOpen}
-          onClose={() => setIsChatOpen(false)}
-        />
-      )}
     </>
   );
 }
