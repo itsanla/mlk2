@@ -3,6 +3,7 @@ version: '3.8'
 services:
   redis:
     image: redis:7-alpine
+    container_name: mlk2-redis
     ports:
       - "6379:6379"
     volumes:
@@ -11,9 +12,18 @@ services:
     restart: unless-stopped
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   api:
     image: itsanla/mlk2-api:latest
+    container_name: mlk2-api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     environment:
@@ -21,28 +31,52 @@ services:
       - SECRET_KEY=${SECRET_KEY:-django-insecure-change-this-in-production}
       - ALLOWED_HOSTS=kelompok2-api.mooo.com,localhost,127.0.0.1
       - CORS_ALLOWED_ORIGINS=https://kelompok2.mooo.com,http://localhost:3000
-      - REDIS_URL=redis://redis:6379/0
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - DEFAULT_MODEL_VERSION=4.1.0
     restart: unless-stopped
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/api/health/')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   web:
     image: itsanla/mlk2-web:latest
+    container_name: mlk2-web
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000}
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=https://kelompok2-api.mooo.com
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-https://kelompok2-api.mooo.com}
       - NODE_ENV=production
     restart: unless-stopped
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
 volumes:
   redis_data:
+    driver: local
 
 networks:
   app-network:
