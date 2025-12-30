@@ -131,7 +131,7 @@ export default function OverviewPage() {
                 title="Train Accuracy" 
                 value={`${(modelMetadata.accuracy * 100).toFixed(1)}%`} 
                 icon="🎯" 
-                status={modelMetadata.overfitting_score > 0.15 ? 'High' : modelMetadata.overfitting_score > 0.1 ? 'Moderate' : 'Low'}
+                status={modelMetadata.overfitting_score > 0.2 ? 'High' : modelMetadata.overfitting_score > 0.15 ? 'Moderate' : 'Low'}
               />
               <MetricCard title="CV Accuracy" value={`${(modelMetadata.cv_accuracy * 100).toFixed(1)}%`} icon="✅" />
               <MetricCard title="Test Accuracy" value={modelMetadata.test_accuracy ? `${(modelMetadata.test_accuracy * 100).toFixed(1)}%` : 'N/A'} icon="📊" />
@@ -149,14 +149,14 @@ export default function OverviewPage() {
                   <p className="text-3xl font-bold text-gray-900">{(modelMetadata.cv_accuracy * 100).toFixed(1)}%</p>
                 </div>
                 <div className={`rounded-lg p-4 ${
-                  modelMetadata.overfitting_score > 0.15 ? 'bg-red-50' : 
-                  modelMetadata.overfitting_score > 0.1 ? 'bg-yellow-50' : 'bg-green-50'
+                  modelMetadata.overfitting_score > 0.2 ? 'bg-red-50' : 
+                  modelMetadata.overfitting_score > 0.15 ? 'bg-yellow-50' : 'bg-green-50'
                 }`}>
                   <p className="text-sm text-gray-600 mb-2">Overfitting</p>
                   <p className="text-3xl font-bold text-gray-900">{(modelMetadata.overfitting_score * 100).toFixed(1)}%</p>
                   <p className="text-xs text-gray-500 mt-1">
-                    {modelMetadata.overfitting_score > 0.15 ? 'High' : 
-                     modelMetadata.overfitting_score > 0.1 ? 'Moderate' : 'Low'}
+                    {modelMetadata.overfitting_score > 0.2 ? 'High' : 
+                     modelMetadata.overfitting_score > 0.15 ? 'Moderate' : 'Low'}
                   </p>
                 </div>
               </div>

@@ -505,7 +505,7 @@ class NaiveBayesModel:
             "model_health": {
                 "overfitting_score": float(overfitting_score),
                 "overfitting_status": (
-                    "High" if overfitting_score > 0.1 else "Moderate" if overfitting_score > 0.05 else "Low"
+                    "High" if overfitting_score > 0.2 else "Moderate" if overfitting_score > 0.15 else "Low"
                 ),
                 "variance": float(variance),
                 "bias": float(bias),
