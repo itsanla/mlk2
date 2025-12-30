@@ -21,16 +21,13 @@ services:
   api:
     image: itsanla/mlk2-api:latest
     container_name: mlk2-api
-    build:
-      context: ./api
-      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     environment:
-      - DEBUG=False
+      - DEBUG=${DEBUG:-False}
       - SECRET_KEY=${SECRET_KEY:-django-insecure-change-this-in-production}
-      - ALLOWED_HOSTS=kelompok2-api.mooo.com,localhost,127.0.0.1
-      - CORS_ALLOWED_ORIGINS=https://kelompok2.mooo.com,http://localhost:3000
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-kelompok2-api.mooo.com,13.212.29.21,localhost,127.0.0.1}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-https://kelompok2.mooo.com,http://13.212.29.21:3000,http://localhost:3000}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_DB=0
@@ -51,11 +48,6 @@ services:
   web:
     image: itsanla/mlk2-web:latest
     container_name: mlk2-web
-    build:
-      context: ./web
-      dockerfile: Dockerfile
-      args:
-        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000}
     ports:
       - "3000:3000"
     environment:
