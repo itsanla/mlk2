@@ -1,0 +1,161 @@
+No,Program Studi,Judul TA Bersih,KBK
+1,D.3 Teknik Komputer,implementasi cloud comput pemberian pakan ikan otomati aquarium,Software
+2,D.3 Teknik Komputer,pemanfaatan aw server deploy sistem ujian onlin,Software
+3,D.3 Teknik Komputer,pembuatan aplikasi antrian berbasi android klinik menerapkan sistem bpj,Software
+4,D.3 Teknik Komputer,implementasi cicd automat deploy aw codepipelin aw,Software
+5,D.3 Teknik Komputer,implementasi pwaprogress web app solusi meningkatkan kinerja aplikasi berbasi websit aplikasi jadwal kuliah,Software
+6,D.3 Teknik Komputer,impelementasi server web nextcloud aplikasi rukun tetangga rt berbasi android,Software
+7,D.3 Teknik Komputer,implementasi devop amazon web servic aplikasi web,Software
+8,D.3 Teknik Komputer,aplikasi pemantauan aset perkantoran berbasi reactn,Software
+9,D.3 Teknik Komputer,aplikasi pemesanan air galon onlin fitur track posisi pengantar galon berbasi android,Software
+10,D.3 Teknik Komputer,implementasi rest api aplikasi pendaftaran pemeriksaan pasien klinik berbasi android,Software
+11,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi algoritma haversin absensi kepegawaian berbasi android,Software
+12,D.3 Teknik Komputer,pemanfaatan teknolog komputasi awan sistem laundri berbasi iot angga laundri,Software
+13,D.3 Manajemen Informatika,sistem informasi berbasi web rawat jalan puskesma magek,Software
+14,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi algoritma boyer moor sistem informasi administrasi tata usaha berbasi websit sd islam alazhar 32 kota padang,Software
+15,D.3 Teknik Komputer,implementasi rest api aplikasi order didepot air minum isi ulang berbasi android,Software
+16,D.3 Teknik Komputer,implementasi monitor log server berbasi elasticsearch logstash kibana ubuntu server 1804,Software
+17,D.3 Teknik Komputer,implementasi sistem absensi opencvphyton face recognit rasberri pi,Software
+18,D.3 Teknik Komputer,perancangan pembuatan aplikasi tracer studi jurusan teknolog informasi,Software
+19,D.3 Teknik Komputer,penetr test web server sistem operasi kali linux,Software
+20,D.3 Teknik Komputer,implementasi leap motion control aplikasi pengenalan perangkat kera komput media pembelajaran interaktif,Software
+21,D.3 Teknik Komputer,aplikasi mcommerc admin fresh food berbasi android,Software
+22,D.3 Teknik Komputer,monitor debu berbasi android lingkungan pabrik pt semen padang,Software
+23,D.3 Teknik Komputer,absensi onlin pemanfaatan raspberri nodemcu aplikasi android efesiensi pengambilan minimalisir kecurangan absensi,Software
+24,D.3 Teknik Komputer,aplikasi pengenalan tari tradision minangkabau metod augment realiti berbasi android,Software
+25,D.3 Teknik Komputer,perancangan implementasi monitor hidroponik node mcu berbasi android web server aw,Software
+26,D.3 Manajemen Informatika,aplikasi pasar rabu tani berbasi android,Software
+27,D.3 Manajemen Informatika,sistem informasi geografi tower bt base transceiv station wilayah kota bukittinggi framework laravel 60,Software
+28,D.3 Manajemen Informatika,perancangan implementasi sistem informasi pengarsipan surat pt pasoka sumber karya framework codeignit,Software
+29,D.3 Manajemen Informatika,sistem informasi manajemen keuangan berbasi websit koperasi mandiri merdeka,Software
+30,D.3 Manajemen Informatika,rancang bangun sistem informasi manajemen pasien klinik pratama yossi adhwa framework codeignit,Software
+31,D.3 Teknik Komputer,perancangan implementasi public cloud storag owncloud,Software
+32,D.3 Teknik Komputer,aplikasi presensi mahasiswa teknolog informasi qrcode berbasi android,Software
+33,D.3 Teknik Komputer,analisa keamanan jaringan wireless kali linux,Software
+34,D.3 Teknik Komputer,perancangan implementasi iot server mqtt,Software
+35,D.3 Teknik Komputer,implementasi augment realiti mata pelajaran perakitan komput,Software
+36,D.3 Teknik Komputer,prometheu grafana perangkat monitor server teknolog informasi politeknik negeri padang sistem,Software
+37,D.3 Manajemen Informatika,pendaftaran onlin siswa sekolah dasar negeri kabupaten solok berbasi websit framework laravel era new normal,Software
+38,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi sistem informasi daftar pencarian orang hilang algoritma rsa berbasi android,Software
+39,D.3 Manajemen Informatika,perancangan implementasi sistem informasi manajemen rekam medi antrian pasien praktik dokter mandiri framework codeignit,Software
+40,D.3 Manajemen Informatika,perancangan sistem informasi pengarsipan surat masuk surat dina pendidikan kota payakumbuh,Software
+41,D.3 Teknik Komputer,perancangan implementasi protokol high avail network backup rout gateway router mikrotik pt sewiwi indonesia,Jaringan
+42,D.3 Teknik Komputer,implementasi antrian book barbershop onlin berbasi android,Jaringan
+43,D.3 Teknik Komputer,implementasi log event manag server elast stack,Jaringan
+44,D.3 Teknik Komputer,aplikasi digitalisasi seni bela silat minangkabau,Jaringan
+45,D.3 Teknik Komputer,alat pembantu penyiraman tanaman otomati berbasi iot,Jaringan
+46,D.3 Teknik Komputer,kdai aplikasi ecommerc reactn firebas,Jaringan
+47,D.3 Teknik Komputer,membangun server instant messag openfir dina komunikasi informatika kota solok,Jaringan
+48,D.3 Teknik Komputer,sistem penyiraman otomati web tumbuhan strawberri berbasi iot,Jaringan
+49,D.3 Teknik Komputer,perancangan prototyp water flow counter berbasi telegram mikrokontrol nodemcu,Jaringan
+50,D.3 Teknik Komputer,perancangan implementasi manajemen bandwidth queue tree metod pcq peer connect queue,Jaringan
+51,D.3 Teknik Komputer,implementasi teknolog internet of thing teknik budidaya akuaponik,Jaringan
+52,D.3 Teknik Komputer,keamanan jaringan pfsens firewal intrusi deteksi prevensi sistem idp snort,Jaringan
+53,D.3 Teknik Komputer,perancangan implementasi privat cloud storag nextcloud notifikasi monitor telegram,Jaringan
+54,D.3 Teknik Komputer,monitor pemeliharaan pemberian pakan otomati bibit ikan kome berbasi iot web,Jaringan
+55,D.3 Teknik Komputer,perancangan pembuatan applic load balanc aw,Jaringan
+56,D.3 Teknik Komputer,implementasi sistem keamanan high avail server aw websit smkn 5 padang,Jaringan
+57,D.3 Manajemen Informatika,â¬â¬rancang bangun sistem bimbingan onlin,Jaringan
+58,D.3 Teknik Komputer,penerapan webserv sistem esp32 menampilkan hasil monitor suhu kelembaban ruangan,Jaringan
+59,D.3 Teknik Komputer,sistem manajemen keamanan ruangan fingerprint sensor suhu,Jaringan
+60,D.3 Teknik Komputer,implementasi react nativ firebas aplikasi konsultasi onlin jurusan teknolog informasi,Jaringan
+61,D.3 Teknik Komputer,smart trash bin monitor aplikasi android smartphon berbasi iot,Jaringan
+62,D.3 Teknik Komputer,pembuatan applic load balanc algoritma round robin sticki aw,Jaringan
+63,D.3 Teknik Komputer,â¬â¬â¬â¬â¬implementasi cicd automat deploy api jenkin jurusan teknolog informasi politeknik negeri padang,Jaringan
+64,D.3 Teknik Komputer,sistem kontrol monitor kolam ikan berbasi iot,Jaringan
+65,D.3 Teknik Komputer,penerapan jaringan sensor nirkabel sistem monitor kandang sapi,Jaringan
+66,D.3 Teknik Komputer,sistem monitor suhu detak jantung sapi esp8266,Jaringan
+67,D.3 Teknik Komputer,rancang bangun sistem monitor kandang ayam pedag berbasi iot notifikasi telegram,Jaringan
+68,D.3 Teknik Komputer,“ implementasi infrastruktur aw ec2 alat monitor kerusakan mesin sepeda motor berdasarkan level getaran suhu ”,Jaringan
+69,D.3 Teknik Komputer,rancang bangun alat sistem monitor air depot air minum sensor td sensor ph berbasi android mikrokontrol arduino uno,Jaringan
+70,D.3 Teknik Komputer,implementasi internet of thing sistem absensi fingerprint sman 4 padang,Jaringan
+71,D.3 Teknik Komputer,pengujian keamanan aplikasi web broken authent session hijack,Jaringan
+72,D.3 Teknik Komputer,penerapan keamanan jaringan sistem snort pendeteksi serangan loic hping3 penyerang,Jaringan
+73,D.3 Teknik Komputer,simulasi softwar defin network openflow ono control,Jaringan
+74,D.3 Teknik Komputer,implementasi monitor jaringan server librenm notifikasi telegram villa rizki ilhami sawangan depok,Jaringan
+75,D.3 Teknik Komputer,analisi penanganan teknik serangan crossit script xss attack aplikasi berbasi web,Jaringan
+76,D.3 Teknik Komputer,implementasi monitor kesehatan variabel suhu detak jantung sapi infrastruktur aw studi pd peternakan nusa fauna,Jaringan
+77,D.3 Teknik Komputer,implementasi sistem video confer jitsi amazon web servic jurusan teknolog informasi politeknik negeri padang,Jaringan
+78,D.3 Teknik Komputer,implementasi iot monitor kapasita pengunjung perpustakaan esp 8266 srf04 politeknik negeri padang,Jaringan
+79,D.3 Manajemen Informatika,sistem informasi perpustakaan balai bahasa sumatra barat berbasi web framework laravel,Jaringan
+80,D.3 Teknik Komputer,alat pengatur suhu otomati penetasan telur ayam berbasi mikrokontrol android server aw amazon web servic,Jaringan
+81,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi jaringan syaraf tiruan prediksi cuaca plta sumatera barat,AI / Machine Learning
+82,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi algoritma cosin similar pengecekan essay sistem informasi ujk uji kompetensi,AI / Machine Learning
+83,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi algoritma knn knearest neighbor pembangunan aplikasi mengukur keakuratan klasifikasi titik pengguna hotspot wifi gedung e politeknik negeri padang,AI / Machine Learning
+84,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi arsitektur microservic pembangunan emarket place studi penerapan algoritma saw prose penentuan penerima voucher diskon,AI / Machine Learning
+85,D.4 Teknologi Rekayasa Perangkat Lunak,sistem pendukung keputusan pemilihan unit kegiatan mahasiswa politeknik negeri padang metod ahp saw berbasi web,AI / Machine Learning
+86,D.3 Manajemen Informatika,perancangan implementasi sistem penunjang keputusan penerima beasiswa smpn 5 x koto berbasi web,AI / Machine Learning
+87,D.4 Teknologi Rekayasa Perangkat Lunak,sistem pakar deteksi covid19 metod forward chain studi klinik laksmi ana,AI / Machine Learning
+88,D.3 Manajemen Informatika,sistem rekomendasi resep masakan berdasarkan bahan content base filter,AI / Machine Learning
+89,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi algoritma rabin karp membantu mendeteksi plagiarism karya ilmiah studi program studi teknolog rekayasa perangkat lunak jurusan teknolog informasi politeknik negeri padang,AI / Machine Learning
+90,D.4 Teknologi Rekayasa Perangkat Lunak,penerapan algoritma a pencarian lokasi gedung universita andala berbasi web,AI / Machine Learning
+91,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi outlet potensi pt santiniluwansa lestari group cabang padang metod topsi,AI / Machine Learning
+92,D.4 Teknologi Rekayasa Perangkat Lunak,sistem pendukung keputusan penerimaan karyawan metod mfep multifactor evalu process,AI / Machine Learning
+93,D.4 Teknologi Rekayasa Perangkat Lunak,sistem pendukung keputusan penerimaan mahasiswa magang metod saw simpl addit weight studi bank nagari pusat kota padang,AI / Machine Learning
+94,D.4 Teknologi Rekayasa Perangkat Lunak,decis support system penentuan tingkat kematangan anak metod forward chain,AI / Machine Learning
+95,D.4 Teknologi Rekayasa Perangkat Lunak,penerapan metod simpl addit weight sistem penerimaan karyawan stasiun pengisian bahan bakar spbu,AI / Machine Learning
+96,D.4 Teknologi Rekayasa Perangkat Lunak,aplikasi pengambilan keputusan algoritma k nearest neighbor k mean konsumen ga elpiji non subsidi kota padang berbasi web,AI / Machine Learning
+97,D.4 Teknologi Rekayasa Perangkat Lunak,klasifikasi profil lulusan mahasiswa berdasarkan nilai mata kuliah metod k nearest neighbor,AI / Machine Learning
+98,D.4 Teknologi Rekayasa Perangkat Lunak,sistem pendukung keputusan pemilihan hero meta penerapan strategi dota 2 metod saw simpl addit weight studi dota 2,AI / Machine Learning
+99,D.4 Teknologi Rekayasa Perangkat Lunak,sistem pendukung keputusan penentuan pembimb proyek metod cosin,AI / Machine Learning
+100,D.3 Teknik Komputer,monitor suhu kelambaban mesin produksi berbasi iot pt japfa comfe indonesia tbk padang,AI / Machine Learning
+101,D.3 Manajemen Informatika,perancangan sistem informasi pendaftaran te onlin pondok pesantren berbasi web framework codeignit,AI / Machine Learning
+102,D.3 Manajemen Informatika,sistem informasi berbasi web laravel framework pengelolaan program tahfizh rumah tahfizh ahlul quranmodul tahfizh harian,AI / Machine Learning
+103,D.3 Teknik Komputer,pengimplementasian internet of thing sistem manajemen kehadiran metod face recognit berbasi web,AI / Machine Learning
+104,D.3 Teknik Komputer,deteksi wajah bermask perpustakaan politeknik negeri padang webcam aw ec2 berbasi raspberri pi,AI / Machine Learning
+105,D.3 Teknik Komputer,perancangan implementasi program identifikasi barang berbasi imag process jurusan teknolog informasi politeknik negeri padang,AI / Machine Learning
+106,D.4 Teknologi Rekayasa Perangkat Lunak,fraud detect aplikasi akuntansi pt tre jaya ship algoritma kmean,AI / Machine Learning
+107,D.3 Manajemen Informatika,sistem informasi pengaduan pelayanan psikolog mental health mahasiswa politeknik negeri padang fitur registrasi chatbot berbasi web framework laravel,AI / Machine Learning
+108,D.4 Teknologi Rekayasa Perangkat Lunak,sistem pendukung keputusan penerimaan mahasiswa jalur pmdkpn politeknik negeri padang metod simpl addit weight,AI / Machine Learning
+109,D.4 Teknologi Rekayasa Perangkat Lunak,sistem pendukung keputusan pemilihan program studi politeknik negeri padang metod ahp saw berbasi web,AI / Machine Learning
+110,D.3 Teknik Komputer,deploy project ai mendeteksi berita palsu,AI / Machine Learning
+111,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi metod cosin similar tfidf sistem informasi pengajuan judul proyek,AI / Machine Learning
+112,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi algoritma cosin similar sistem ujian essay sistem akademik berbasi android,AI / Machine Learning
+113,D.4 Teknologi Rekayasa Perangkat Lunak,prediksi kelulusan mahasiswa metod naã¯v baiy jurusan teknolog informasi politeknik negeri padang,AI / Machine Learning
+114,D.4 Teknologi Rekayasa Perangkat Lunak,sistem pengambil keputusan pemilihan karyawan teladan metod ahp smart studi dâ€™besto,AI / Machine Learning
+115,D.3 Manajemen Informatika,perancangan implementasi sistem informasi enterpris resourc plan erp toko sulaman bordiran putri ayu framework laravel,AI / Machine Learning
+116,D.3 Teknik Komputer,perbandingan prediksi harga rumah metod linear regress random forest,AI / Machine Learning
+117,D.3 Teknik Komputer,pencarian performa pilihan model pendeteksi berita palsu,AI / Machine Learning
+118,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi metod simpl multi attribut rate techniqu mengevaluasi prose bimbingan proyek mahasiswa program sarjana terapan teknolog rekayasa perangkat lunak,AI / Machine Learning
+119,D.3 Teknik Komputer,rancang bangun aplikasi informasi lokasi ujian politeknik negeri padang metod markerless augment realiti berbasi android,AI / Machine Learning
+120,D.4 Teknologi Rekayasa Perangkat Lunak,klasifikasi algoritma naãv bay validasi prediksi data peminjaman barang inventari,AI / Machine Learning
+121,D.3 Teknik Komputer,pemanfaatan teknolog virtual realiti media pembelajaran prose pemasangan kabel utp cross straight,Animasi
+122,D.3 Teknik Komputer,pengenalan perangkat jaringan komput komput virtual realiti,Animasi
+123,D.3 Manajemen Informatika,perancangan implementasi sistem informasi sekolah sd n 02 pampangan,Animasi
+124,D.3 Manajemen Informatika,sistem informasi pariwisata kota padang berbasi web,Animasi
+125,D.3 Teknik Komputer,aw cloud server implementasi aplikasi donor jemput darah teknolog open street map jwt token berbasi android,Animasi
+126,D.3 Teknik Komputer,penerapan teknolog spark ar pengenalan suntiang minangkabau,Animasi
+127,D.3 Manajemen Informatika,sistem informasi pengaduan layanan kesehatan puskema pauh berbasi web,Animasi
+128,D.3 Manajemen Informatika,aplikasi pemeliharaan manajemen aset berbasi web,Animasi
+129,D.3 Teknik Komputer,aplikasi monitor air water torn otomati berbasi android dukung mikrokontrol,Animasi
+130,D.3 Manajemen Informatika,sistem informasi rz tour travel berbasi web framework laravel 70,Animasi
+131,D.3 Manajemen Informatika,sistem informasi manajemen kegiatan mahasiswa jurusan teknolog informasi,Animasi
+132,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi data warehous perancangan dashboard jurusan akademik jurusan teknolog informasi politeknik negeri padang,Animasi
+133,D.3 Teknik Komputer,media pembelajaran prose solder desold berbasi augment realiti,Animasi
+134,D.3 Manajemen Informatika,membangun frontend aplikasi secondhand framework nextj pt lentera bangsa benderang,Animasi
+135,D.3 Manajemen Informatika,sistem informasi madrasah diniyah takmiliyah awaliyah mdta arrahman kecamatan pariaman utara kota pariaman berbasi web framework laravel,Animasi
+136,D.4 Teknologi Rekayasa Perangkat Lunak,perancangan design uiux portal perusahaan pt arwyndo jaya cemerlang metod design think,Animasi
+137,D.3 Teknik Komputer,implementasi teknolog virtual realiti media pembelajaran pengenalan komponen perakitan komput politeknik negeri padang,Animasi
+138,D.3 Teknik Komputer,membangun virtual lab mata kuliah internet of thing jupyt notebook,Animasi
+139,D.3 Manajemen Informatika,implementasi sistem informasi purchas order monitor manajemen keuangan toko onlin warnaw framework codeignit,Animasi
+140,D.3 Manajemen Informatika,sistem informasi pariwisata berbasi web media promosi provinsi sumatera baratsistem informasi pariwisata berbasi web media promosi provinsi sumatera barat,Animasi
+141,D.3 Manajemen Informatika,sistem informasi barbershop pangeran tigo berbasi web,Animasi
+142,D.3 Manajemen Informatika,perancangan pembuatan sistem informasi bimbingan konsel smp negeri 1 batang anai berbasi web mobil,Animasi
+143,D.3 Manajemen Informatika,pengembangan sistem informasi repositori tuga jurusan teknolog informasi politeknik negeri padang framework laravel,Animasi
+144,D.3 Manajemen Informatika,laporan tengahakhir magang studi independen bersertifikat uiux design bidang fintech binar academi,Animasi
+145,D.4 Teknologi Rekayasa Perangkat Lunak,implementasi algoritma rabinkarp penilaian essay otomati ujian onlin berbasi web,Animasi
+146,D.3 Manajemen Informatika,aplikasi pemetaan fasilita publik kota padang berbasi android,Animasi
+147,D.3 Manajemen Informatika,perancangan pembuatan sistem informasi kalibrasi pt epson batam,Animasi
+148,D.3 Teknik Komputer,perancangan aplikasi furnitur media promosi berbasi augment realiti umkm ud bungo rajo,Animasi
+149,D.3 Teknik Komputer,pemanfaatan teknolog augment realiti media pembelajaran pengenalan komponen dasar elektronika berbasi android kampu politeknik negeri padang,Animasi
+150,D.3 Teknik Komputer,implementasi aw ec2 server sistem informasi ujian onlin,Animasi
+151,D.3 Manajemen Informatika,aplikasi informasi wed organ kota padang berbasi android,Animasi
+152,D.3 Teknik Komputer,rancang bangun sistem informasi lowongan kerja alumni kampu pnp mengunakan aw ec2,Animasi
+153,D.3 Teknik Komputer,monitor alat penyiram tanaman iot nodemcu berbasi android,Animasi
+154,D.3 Teknik Komputer,pengenalan alat musik tradision minangkabau augmant realiti media edukasi berbasi android,Animasi
+155,D.3 Teknik Komputer,perancangan pembuatan aplikasi elearn berbasi mobil framework reactn mahasiswa,Animasi
+156,D.3 Teknik Komputer,sistem evot sensor finger print rfid pemilihan presiden mahasiswa berbasi mobil,Animasi
+157,D.3 Teknik Komputer,aplikasi made mengunakan flutter berbasi client server politeknik negeri padang,Animasi
+158,D.3 Teknik Komputer,rancang bangun server aplikasi manajemen layanan politeknik negeri padang,Animasi
+159,D.3 Teknik Komputer,implementasi metod markerless augment realiti monumen sejarah kota padang,Animasi
+160,D.3 Teknik Komputer,monitor jaringan mikrotik notifikasi telegram cacti dina komunikasi informatika kota padang,Animasi

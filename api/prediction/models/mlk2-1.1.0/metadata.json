@@ -1,0 +1,11 @@
+{
+  "name": "MLK2 Low Alpha Model",
+  "description": "Model with alpha=0.05 for lower smoothing",
+  "accuracy": 0.6125,
+  "cv_accuracy": 0.475,
+  "overfitting_score": 0.13750000000000007,
+  "total_samples": 160,
+  "version": "1.1.0",
+  "created_at": "2025-12-29T23:42:59.693868",
+  "model_path": "/media/anla/DATA_B/project/SEMESTER5/matkul-machine-learning/mlk2/api/prediction/models/mlk2-1.1.0"
+}

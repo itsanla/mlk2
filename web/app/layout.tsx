@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
+import { ModelProvider } from '@/contexts/ModelContext';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,8 +30,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <Sidebar />
-        <main className="lg:ml-64">{children}</main>
+        <ModelProvider>
+          <Sidebar />
+          <main className="lg:ml-64">{children}</main>
+        </ModelProvider>
       </body>
     </html>
   );

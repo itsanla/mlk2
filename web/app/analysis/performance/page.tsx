@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import { useModel } from '@/contexts/ModelContext';
 
 const VChart = dynamic(() => import('@visactor/react-vchart').then(mod => mod.VChart), { ssr: false });
 
@@ -20,18 +21,38 @@ interface AnalysisData {
 
 export default function PerformancePage() {
   const [data, setData] = useState<AnalysisData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { selectedModel } = useModel();
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      const response = await fetch(`${apiUrl}/api/analyze/`);
-      const result = await response.json();
-      setData(result);
+      if (!selectedModel) {
+        setLoading(false);
+        return;
+      }
+      
+      setLoading(true);
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const response = await fetch(`${apiUrl}/api/analyze/?model_version=${selectedModel}`);
+        const result = await response.json();
+        
+        if (!result.error && result.performance) {
+          setData(result);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+      setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [selectedModel]);
 
-  if (!data) return <div className="p-8">Loading...</div>;
+  if (loading) return <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50"><div className="max-w-5xl mx-auto px-4 py-12"><div className="text-center py-20">Loading performance data...</div></div></div>;
+  
+  if (!selectedModel) return <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50"><div className="max-w-5xl mx-auto px-4 py-12"><div className="text-center py-20 text-gray-500">Please select a model version from the home page</div></div></div>;
+  
+  if (!data || !data.performance) return <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50"><div className="max-w-5xl mx-auto px-4 py-12"><div className="text-center py-20 text-gray-500">Performance analysis not available for v{selectedModel}</div></div></div>;
 
   const cvScoresData = data.performance.cv_scores.map((score, i) => ({
     fold: `Fold ${i + 1}`,

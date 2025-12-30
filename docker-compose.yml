@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    restart: unless-stopped
+    networks:
+      - app-network
+
   api:
     image: itsanla/mlk2-api:latest
     ports:
@@ -10,7 +21,10 @@ services:
       - SECRET_KEY=${SECRET_KEY:-django-insecure-change-this-in-production}
       - ALLOWED_HOSTS=kelompok2-api.mooo.com,localhost,127.0.0.1
       - CORS_ALLOWED_ORIGINS=https://kelompok2.mooo.com,http://localhost:3000
+      - REDIS_URL=redis://redis:6379/0
     restart: unless-stopped
+    depends_on:
+      - redis
     networks:
       - app-network
 
@@ -26,6 +40,9 @@ services:
       - api
     networks:
       - app-network
+
+volumes:
+  redis_data:
 
 networks:
   app-network:

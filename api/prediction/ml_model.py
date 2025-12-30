@@ -35,6 +35,16 @@ class NaiveBayesModel:
         self.model_path = Path(__file__).parent / "model.pkl"
         self.vectorizer_path = Path(__file__).parent / "vectorizer.pkl"
         self.selector_path = Path(__file__).parent / "selector.pkl"
+        
+        # Smart stopwords untuk v3.0.0
+        self.smart_stopwords = [
+            'padang', 'kota', 'kabupaten', 'sumatera', 'barat', 'indonesia', 'ri', 'negeri', 
+            'politeknik', 'universitas', 'institut', 'sekolah', 'madrasah', 'pt', 'cv', 
+            'dinas', 'kantor', 'desa', 'kelurahan', 'kecamatan', 'nagari', 'dan', 'di', 
+            'pada', 'dengan', 'menggunakan', 'studi', 'kasus', 'untuk', 'sebagai', 'dalam', 
+            'ke', 'dari', 'yang', 'oleh', 'serta', 'tugas', 'akhir', 'jurusan', 'prodi', 
+            'program', 'tahun'
+        ]
 
         self.keywords = {
             "AI / Machine Learning": [
@@ -127,8 +137,17 @@ class NaiveBayesModel:
             'animasi_total_score': tool_count + tech_count + concept_count
         }
     
-    def preprocess(self, text):
+    def preprocess(self, text, use_smart_stopwords=False):
         text = text.lower()
+        
+        if use_smart_stopwords:
+            # v3.0.0: Simple cleaning dengan smart stopwords
+            text = re.sub(r'[^a-z\s]', ' ', text)
+            words = text.split()
+            words = [w for w in words if w not in self.smart_stopwords]
+            return ' '.join(words)
+        
+        # Legacy preprocessing untuk model lama
         # Normalisasi domain-specific terms
         text = re.sub(r"na[iï]ve?\s*baye?s?", "naive bayes", text)
         text = re.sub(r"augment\s*realiti", "augmented reality", text)
@@ -259,7 +278,15 @@ class NaiveBayesModel:
 
         return {"prediction": prediction, "probabilities": prob_dict}
 
-    def analyze_model(self, csv_path):
+    def analyze_model(self, csv_path, model_version=None):
+        # If model_version provided, use data from model folder
+        if model_version:
+            from prediction.model_manager import ModelManager
+            mm = ModelManager()
+            model_data_path = mm.get_model_path(model_version) / "data.csv"
+            if model_data_path.exists():
+                csv_path = str(model_data_path)
+        
         csv_file = Path(csv_path)
         if not csv_file.exists():
             raise FileNotFoundError(f"CSV file not found: {csv_path}")
@@ -269,8 +296,17 @@ class NaiveBayesModel:
                 raise ModelNotLoadedError("Model not trained yet")
 
         df = pd.read_csv(csv_path)
-        X = df["Judul TA Bersih"].apply(self.preprocess)
-        y = df["KBK"]
+        
+        # Support both old and new column names
+        if 'Judul TA Bersih' in df.columns:
+            X = df["Judul TA Bersih"].apply(self.preprocess)
+            y = df["KBK"]
+        elif 'Judul' in df.columns:
+            X = df["Judul"].apply(lambda x: self.preprocess(x, use_smart_stopwords=True))
+            y = df["Kategori"]
+        else:
+            raise ValueError("CSV must have 'Judul TA Bersih' or 'Judul' column")
+            
         X_vectorized = self.vectorizer.transform(X)
         
         # v3.0: No feature selection
@@ -418,18 +454,32 @@ class NaiveBayesModel:
         
         # 11. LEARNING CURVE for visualization
         learning_curve = []
-        domain_stopwords = getattr(self, 'domain_stopwords', [
-            'sistem', 'implementasi', 'berbasis', 'aplikasi', 'informasi', 
-            'web', 'teknologi', 'media', 'padang', 'politeknik', 'negeri', 
-            'perancangan', 'metod', 'menggunakan', 'dengan', 'untuk', 'pada'
-        ])
+        
+        # Use current model's configuration
+        current_alpha = self.model.alpha
+        current_ngram = self.vectorizer.ngram_range if hasattr(self.vectorizer, 'ngram_range') else (1, 2)
+        
+        # Detect stopwords (smart vs domain)
+        if hasattr(self, 'smart_stopwords'):
+            stopwords = self.smart_stopwords
+        else:
+            stopwords = getattr(self, 'domain_stopwords', [
+                'sistem', 'implementasi', 'berbasis', 'aplikasi', 'informasi', 
+                'web', 'teknologi', 'media', 'padang', 'politeknik', 'negeri', 
+                'perancangan', 'metod', 'menggunakan', 'dengan', 'untuk', 'pada'
+            ])
+        
         for features in [20, 40, 60, 80, 100]:
             temp_vec = TfidfVectorizer(
-                max_features=features, ngram_range=(1, 2), min_df=4 if features < 50 else 3,
-                max_df=0.5, sublinear_tf=True, stop_words=domain_stopwords
+                max_features=features,
+                ngram_range=current_ngram,
+                min_df=1,
+                max_df=1.0,
+                sublinear_tf=True,
+                stop_words=stopwords
             )
             X_temp = temp_vec.fit_transform(X)
-            temp_model = MultinomialNB(alpha=1.7 if features < 50 else 1.7)
+            temp_model = MultinomialNB(alpha=current_alpha, fit_prior=True)
             temp_model.fit(X_temp, y)
             
             train_acc = temp_model.score(X_temp, y) * 100

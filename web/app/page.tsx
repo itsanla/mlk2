@@ -2,6 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import ModelSelector from '@/components/ModelSelector';
+import HistoryPanel from '@/components/HistoryPanel';
+import { useSession } from '@/hooks/useSession';
 
 export default function Home() {
   const [judul, setJudul] = useState('');
@@ -9,7 +12,10 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(true);
+  const [modelVersion, setModelVersion] = useState('');
+  const [analysis, setAnalysis] = useState<any>(null);
   const resultRef = useRef<HTMLDivElement>(null);
+  const sessionId = useSession();
 
   const teamMembers = [
     {
@@ -70,14 +76,40 @@ export default function Home() {
       const response = await fetch(`${apiUrl}/api/predict/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ judul })
+        body: JSON.stringify({ 
+          judul,
+          model_version: modelVersion,
+          session_id: sessionId
+        })
       });
       const data = await response.json();
       setResult(data);
+      
+      // Fetch analysis for selected model
+      if (modelVersion) {
+        fetchAnalysis(modelVersion);
+      }
     } catch (error) {
       console.error('Error:', error);
     }
     setLoading(false);
+  };
+
+  const fetchAnalysis = async (version: string) => {
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/api/analyze/?model_version=${version}`);
+      const data = await response.json();
+      setAnalysis(data);
+    } catch (error) {
+      console.error('Error fetching analysis:', error);
+    }
+  };
+
+  const handleHistorySelect = (item: any) => {
+    setJudul(item.judul);
+    setModelVersion(item.model_version);
+    setResult(item);
   };
 
   useEffect(() => {
@@ -111,6 +143,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
+      <HistoryPanel sessionId={sessionId} onSelectItem={handleHistorySelect} />
+      
       {/* Main Content */}
       <main className="max-w-5xl mx-auto px-4 py-12">
         {/* Hero Section with Team Slider */}
@@ -202,6 +236,8 @@ export default function Home() {
 
         {/* Input Card */}
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 mb-8">
+          <ModelSelector value={modelVersion} onChange={setModelVersion} />
+          
           <label className="block text-sm font-semibold text-gray-700 mb-3">
             📝 Judul Tugas Akhir
           </label>
@@ -236,9 +272,14 @@ export default function Home() {
         {/* Result Card */}
         {result && (
           <div ref={resultRef} className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 animate-fade-in">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="text-2xl">✨</span>
-              <h3 className="text-2xl font-bold text-gray-900">Hasil Prediksi</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">✨</span>
+                <h3 className="text-2xl font-bold text-gray-900">Hasil Prediksi</h3>
+              </div>
+              <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                v{result.model_version}
+              </span>
             </div>
             
             {/* Predicted Category */}
@@ -269,6 +310,39 @@ export default function Home() {
                   ))}
               </div>
             </div>
+            
+            {/* Model Analysis */}
+            {analysis && (
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <p className="text-sm font-semibold text-gray-700 mb-3">📈 Performa Model</p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="text-xs text-gray-600 mb-1">Training Acc</p>
+                    <p className="text-lg font-bold text-gray-900">
+                      {(analysis.performance.train_accuracy * 100).toFixed(1)}%
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="text-xs text-gray-600 mb-1">CV Acc</p>
+                    <p className="text-lg font-bold text-gray-900">
+                      {(analysis.performance.cv_mean_accuracy * 100).toFixed(1)}%
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="text-xs text-gray-600 mb-1">Overfitting</p>
+                    <p className="text-lg font-bold text-gray-900">
+                      {(analysis.model_health.overfitting_score * 100).toFixed(1)}%
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="text-xs text-gray-600 mb-1">Samples</p>
+                    <p className="text-lg font-bold text-gray-900">
+                      {analysis.total_samples}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 

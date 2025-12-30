@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { useModel } from '@/contexts/ModelContext';
 
 interface AnalysisData {
   model_type: string;
@@ -45,40 +46,166 @@ interface AnalysisData {
     training: number;
     validation: number;
   }>;
+  model_version?: string;
 }
 
 export default function OverviewPage() {
   const [data, setData] = useState<AnalysisData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [modelMetadata, setModelMetadata] = useState<any>(null);
+  const { selectedModel } = useModel();
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!selectedModel) {
+        setLoading(false);
+        return;
+      }
+      
+      setLoading(true);
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-        const response = await fetch(`${apiUrl}/api/analyze/`);
+        
+        // Fetch model metadata first
+        const modelsResponse = await fetch(`${apiUrl}/api/models/`);
+        const modelsData = await modelsResponse.json();
+        const currentModel = modelsData.models.find((m: any) => m.version === selectedModel);
+        setModelMetadata(currentModel);
+        
+        // Try to fetch analysis
+        const response = await fetch(`${apiUrl}/api/analyze/?model_version=${selectedModel}`);
         const result = await response.json();
-        setData(result);
+        
+        if (!result.error) {
+          setData(result);
+        } else {
+          // If analyze fails, use metadata
+          console.warn('Analysis failed, using metadata');
+        }
       } catch (error) {
         console.error('Error:', error);
       }
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [selectedModel]);
 
-  if (loading) return <div className="text-center py-20">Loading...</div>;
-  if (!data || !data.performance) return <div className="text-center py-20 text-red-600">Failed to load data</div>;
+  if (loading) return (
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
+      <div className="max-w-5xl mx-auto px-4 py-12">
+        <div className="text-center py-20">
+          Loading analysis for v{selectedModel}...
+        </div>
+      </div>
+    </div>
+  );
+  
+  if (!selectedModel) return (
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
+      <div className="max-w-5xl mx-auto px-4 py-12">
+        <div className="text-center py-20 text-gray-500">
+          Please select a model version from the home page
+        </div>
+      </div>
+    </div>
+  );
+  
+  // Use metadata if analysis not available
+  if (!data || !data.performance) {
+    if (modelMetadata) {
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
+          <div className="max-w-5xl mx-auto px-4 py-12 space-y-6">
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="flex items-center justify-between">
+                <h1 className="text-3xl font-bold text-gray-900">📊 Model Analysis</h1>
+                <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                  v{selectedModel}
+                </span>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <MetricCard title="Total Samples" value={modelMetadata.total_samples || 'N/A'} icon="📝" />
+              <MetricCard 
+                title="Train Accuracy" 
+                value={`${(modelMetadata.accuracy * 100).toFixed(1)}%`} 
+                icon="🎯" 
+                status={modelMetadata.overfitting_score > 0.15 ? 'High' : modelMetadata.overfitting_score > 0.1 ? 'Moderate' : 'Low'}
+              />
+              <MetricCard title="CV Accuracy" value={`${(modelMetadata.cv_accuracy * 100).toFixed(1)}%`} icon="✅" />
+              <MetricCard title="Test Accuracy" value={modelMetadata.test_accuracy ? `${(modelMetadata.test_accuracy * 100).toFixed(1)}%` : 'N/A'} icon="📊" />
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h2 className="text-2xl font-bold mb-6">🎯 Model Performance</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-600 mb-2">Training Accuracy</p>
+                  <p className="text-3xl font-bold text-gray-900">{(modelMetadata.accuracy * 100).toFixed(1)}%</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-600 mb-2">CV Accuracy</p>
+                  <p className="text-3xl font-bold text-gray-900">{(modelMetadata.cv_accuracy * 100).toFixed(1)}%</p>
+                </div>
+                <div className={`rounded-lg p-4 ${
+                  modelMetadata.overfitting_score > 0.15 ? 'bg-red-50' : 
+                  modelMetadata.overfitting_score > 0.1 ? 'bg-yellow-50' : 'bg-green-50'
+                }`}>
+                  <p className="text-sm text-gray-600 mb-2">Overfitting</p>
+                  <p className="text-3xl font-bold text-gray-900">{(modelMetadata.overfitting_score * 100).toFixed(1)}%</p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {modelMetadata.overfitting_score > 0.15 ? 'High' : 
+                     modelMetadata.overfitting_score > 0.1 ? 'Moderate' : 'Low'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h2 className="text-2xl font-bold mb-4">📝 Model Info</h2>
+              <div className="space-y-2">
+                <p><span className="font-semibold">Name:</span> {modelMetadata.name}</p>
+                <p><span className="font-semibold">Description:</span> {modelMetadata.description}</p>
+                <p><span className="font-semibold">Created:</span> {new Date(modelMetadata.created_at).toLocaleString('id-ID')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
+        <div className="max-w-5xl mx-auto px-4 py-12">
+          <div className="text-center py-20 text-red-600">
+            Failed to load analysis data for v{selectedModel}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
       <div className="max-w-5xl mx-auto px-4 py-12 space-y-6">
+        {/* Header */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-bold text-gray-900">📊 Model Analysis</h1>
+            <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+              v{selectedModel}
+            </span>
+          </div>
+        </div>
+        
         {/* Metrics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <MetricCard title="Total Samples" value={data.total_samples} icon="📝" />
-        <MetricCard title="Train Accuracy" value={`${(data.performance.train_accuracy * 100).toFixed(1)}%`} icon="🎯" status={data.model_health.overfitting_status} />
-        <MetricCard title="CV Accuracy" value={`${(data.performance.cv_mean_accuracy * 100).toFixed(1)}%`} icon="✅" />
-        <MetricCard title="Features" value={data.model_parameters.n_features} icon="🔤" />
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <MetricCard title="Total Samples" value={data.total_samples} icon="📝" />
+          <MetricCard title="Train Accuracy" value={`${(data.performance.train_accuracy * 100).toFixed(1)}%`} icon="🎯" status={data.model_health.overfitting_status} />
+          <MetricCard title="CV Accuracy" value={`${(data.performance.cv_mean_accuracy * 100).toFixed(1)}%`} icon="✅" />
+          <MetricCard title="Features" value={data.model_parameters.n_features} icon="🔤" />
+        </div>
 
       {/* Model Health */}
       <div className="bg-white rounded-xl shadow-lg p-6">
