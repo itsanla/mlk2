@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e  # Exit on error
+
 VERSION_FILE=".version"
 
 # Baca versi saat ini atau mulai dari 1.0.0
@@ -19,7 +21,9 @@ PATCH="${VERSION_PARTS[2]}"
 PATCH=$((PATCH + 1))
 NEW_VERSION="$MAJOR.$MINOR.$PATCH"
 
-echo "📦 Current version: $CURRENT_VERSION"
+echo "📦 MLK2 Auto Build & Push"
+echo "================================================"
+echo "📋 Current version: $CURRENT_VERSION"
 echo "🆕 New version: $NEW_VERSION"
 echo ""
 
@@ -27,33 +31,49 @@ echo ""
 echo "$NEW_VERSION" > "$VERSION_FILE"
 
 echo "🔨 Building images..."
+echo ""
 
 # Build backend
+echo "[📦 Backend] Building itsanla/mlk2-api:$NEW_VERSION..."
 docker build -t itsanla/mlk2-api:$NEW_VERSION -t itsanla/mlk2-api:latest ./api
 
-# Build frontend
+echo ""
+echo "[📦 Frontend] Building itsanla/mlk2-web:$NEW_VERSION..."
 docker build \
   --build-arg NEXT_PUBLIC_API_URL=https://kelompok2-api.mooo.com \
   -t itsanla/mlk2-web:$NEW_VERSION \
   -t itsanla/mlk2-web:latest \
   ./web
 
+echo ""
 echo "✅ Build completed!"
 echo ""
 echo "🚀 Pushing to Docker Hub..."
+echo "================================================"
 
 # Push dengan version tag
+echo "[⬆️] Pushing itsanla/mlk2-api:$NEW_VERSION..."
 docker push itsanla/mlk2-api:$NEW_VERSION
+
+echo "[⬆️] Pushing itsanla/mlk2-api:latest..."
+docker push itsanla/mlk2-api:latest
+
+echo "[⬆️] Pushing itsanla/mlk2-web:$NEW_VERSION..."
 docker push itsanla/mlk2-web:$NEW_VERSION
 
-# Push latest tag
-docker push itsanla/mlk2-api:latest
+echo "[⬆️] Pushing itsanla/mlk2-web:latest..."
 docker push itsanla/mlk2-web:latest
 
 echo ""
+echo "================================================"
 echo "✅ Successfully pushed version $NEW_VERSION"
+echo ""
 echo "📋 Images:"
-echo "   - itsanla/mlk2-api:$NEW_VERSION"
-echo "   - itsanla/mlk2-api:latest"
-echo "   - itsanla/mlk2-web:$NEW_VERSION"
-echo "   - itsanla/mlk2-web:latest"
+echo "   • itsanla/mlk2-api:$NEW_VERSION"
+echo "   • itsanla/mlk2-api:latest"
+echo "   • itsanla/mlk2-web:$NEW_VERSION"
+echo "   • itsanla/mlk2-web:latest"
+echo ""
+echo "🎯 Deploy with:"
+echo "   docker-compose pull && docker-compose up -d"
+echo ""
